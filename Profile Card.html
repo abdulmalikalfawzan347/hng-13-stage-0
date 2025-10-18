@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="profile.css">
+
+    </head>
+
+    <body>
+        <main data-testid="profile-main">
+            <section data-testid="profile-card" aria-label="User Profile Card" tabindex="0">
+                <figure data-testid="profile-avatar-figure">
+                    <img src="./LOGO.jpg" alt="Profile photo of Abdul Malik" data-testid="profile-avatar" />
+                    <figcaption data-testid="profile/avatar-caption">Joined October 2025</figcaption>
+                    <p id="current-time" data-testid="test-user-time">
+                        <!-- 22:03pm -->
+                    </p>
+
+                </figure>
+                <h1 data-testid="profile-name">Abdul Malik</h1>
+                <p data-testid="profile-bio">
+                    Frontend Developer passionate about accessibility and modern web standards. Building
+                    delightful, inclusive experiences.
+                </p>
+                <section data-testid="hobbies"> Hobbies
+                    <ul>
+                        <li>Coding</li>
+                        <li>Reading</li>
+                    </ul>
+                </section>
+                <section data-testid="dislikes"> Dislikes
+                    <ul>
+                        <li>Slow Internet</li>
+                        <li>Noisy Environment</li>
+                    </ul>
+                </section>
+                <ul data-testid="profile-links" aria-label="Social Links">
+                    <li data-testid="profile-link-item">
+                        <a href="https://github.com/abdulmalikalfawzan347" target="_blank" rel="noopener"
+                            data-testid="profile-link" aria-label="GitHub">
+                            <span aria-hidden="true">🐙</span> GitHub
+                        </a>
+                    </li>
+                    <li data-testid="profile-link-item">
+                        <a href="https://twitter.com/" target="_blank" rel="noopener" data-testid="profile-link"
+                            aria-label="Twitter">
+                            <span aria-hidden="true">🐦</span> Twitter
+                        </a>
+                    </li>
+                    <li data-testid="profile-link-item">
+                        <a href="mailto:abdulmalik@example.com" data-testid="profile-link" aria-label="Email">
+                            <span aria-hidden="true">✉</span> Email
+                        </a>
+                    </li>
+                </ul>
+                <button type="button" data-testid="profile-follow-btn" aria-pressed="false"
+                    aria-label="Follow Abdul Malik">
+                    Follow
+                </button>
+            </section>
+        </main>
+        <script data-testid="profile-card-script">
+            // Accessibility: toggle follow btn
+            const followBtn = document.querySelector('button[data-testid="profile-follow-btn"]');
+            let following = false;
+            followBtn.addEventListener('click', function () {
+                following = !following;
+                followBtn.setAttribute('aria-pressed', following ? 'true' : 'false');
+                followBtn.textContent = following ? 'Following' : 'Follow';
+                followBtn.style.background = following ? '#666' : 'var(--primary)';
+            });
+
+            // Keyboard accessibility for card focus
+            document.querySelector('section[data-testid="profile-card"]').addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    followBtn.focus();
+                }
+            });
+
+
+            let timecont = document.getElementById("current-time");
+
+            setInterval(() => {
+                let currentTime = new Date().toLocaleTimeString();
+                timecont.innerHTML = currentTime;
+            }, 1000)
+
+
+        </script>
+    </body>
+
+</html>
